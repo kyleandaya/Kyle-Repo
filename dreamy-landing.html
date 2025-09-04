@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamy Serenity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, 
+                #FFE4E1 0%, 
+                #F0E68C 25%, 
+                #E6E6FA 50%, 
+                #F5F5DC 75%, 
+                #FFB6C1 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Animated background gradient */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                #FFE4E1, #F0E68C, #E6E6FA, #F5F5DC, #FFB6C1, 
+                #FFE4E1, #F0E68C, #E6E6FA, #F5F5DC, #FFB6C1);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            z-index: -2;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Cloud layers with different speeds */
+        .cloud-layer {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            filter: blur(1px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+        }
+
+        /* Cloud 1 - Slowest movement */
+        .cloud1 {
+            width: 80px;
+            height: 40px;
+            top: 20%;
+            left: -100px;
+            animation: floatCloud1 60s linear infinite;
+        }
+
+        .cloud1::before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 10px;
+        }
+
+        .cloud1::after {
+            width: 60px;
+            height: 40px;
+            top: -15px;
+            right: 10px;
+        }
+
+        @keyframes floatCloud1 {
+            0% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(25vw) translateY(-10px); }
+            50% { transform: translateX(50vw) translateY(5px); }
+            75% { transform: translateX(75vw) translateY(-5px); }
+            100% { transform: translateX(100vw) translateY(0); }
+        }
+
+        /* Cloud 2 - Medium speed */
+        .cloud2 {
+            width: 120px;
+            height: 60px;
+            top: 40%;
+            left: -150px;
+            animation: floatCloud2 45s linear infinite;
+            animation-delay: -10s;
+        }
+
+        .cloud2::before {
+            width: 70px;
+            height: 70px;
+            top: -35px;
+            left: 15px;
+        }
+
+        .cloud2::after {
+            width: 80px;
+            height: 50px;
+            top: -20px;
+            right: 15px;
+        }
+
+        @keyframes floatCloud2 {
+            0% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(20vw) translateY(15px); }
+            50% { transform: translateX(40vw) translateY(-10px); }
+            75% { transform: translateX(60vw) translateY(8px); }
+            100% { transform: translateX(80vw) translateY(0); }
+        }
+
+        /* Cloud 3 - Fastest movement */
+        .cloud3 {
+            width: 100px;
+            height: 50px;
+            top: 60%;
+            left: -120px;
+            animation: floatCloud3 30s linear infinite;
+            animation-delay: -20s;
+        }
+
+        .cloud3::before {
+            width: 60px;
+            height: 60px;
+            top: -30px;
+            left: 20px;
+        }
+
+        .cloud3::after {
+            width: 70px;
+            height: 45px;
+            top: -20px;
+            right: 20px;
+        }
+
+        @keyframes floatCloud3 {
+            0% { transform: translateX(0) translateY(0); }
+            33% { transform: translateX(33vw) translateY(-15px); }
+            66% { transform: translateX(66vw) translateY(10px); }
+            100% { transform: translateX(100vw) translateY(0); }
+        }
+
+        /* Cloud 4 - Different pattern */
+        .cloud4 {
+            width: 90px;
+            height: 45px;
+            top: 80%;
+            left: -90px;
+            animation: floatCloud4 50s linear infinite;
+            animation-delay: -30s;
+        }
+
+        .cloud4::before {
+            width: 55px;
+            height: 55px;
+            top: -28px;
+            left: 12px;
+        }
+
+        .cloud4::after {
+            width: 65px;
+            height: 40px;
+            top: -18px;
+            right: 12px;
+        }
+
+        @keyframes floatCloud4 {
+            0% { transform: translateX(0) translateY(0); }
+            20% { transform: translateX(20vw) translateY(12px); }
+            40% { transform: translateX(40vw) translateY(-8px); }
+            60% { transform: translateX(60vw) translateY(6px); }
+            80% { transform: translateX(80vw) translateY(-4px); }
+            100% { transform: translateX(100vw) translateY(0); }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: floatParticle 8s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .particle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 20%; left: 80%; animation-delay: 2s; }
+        .particle:nth-child(3) { top: 50%; left: 20%; animation-delay: 4s; }
+        .particle:nth-child(4) { top: 70%; left: 70%; animation-delay: 6s; }
+        .particle:nth-child(5) { top: 30%; left: 50%; animation-delay: 1s; }
+        .particle:nth-child(6) { top: 80%; left: 30%; animation-delay: 3s; }
+
+        @keyframes floatParticle {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
+            50% { transform: translateY(-20px) scale(1.2); opacity: 1; }
+        }
+
+        /* Main content */
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 4rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            animation: titleGlow 4s ease-in-out infinite alternate;
+            letter-spacing: 3px;
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8); }
+            100% { text-shadow: 0 0 50px rgba(255, 255, 255, 1), 0 0 80px rgba(255, 255, 255, 0.6); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            animation: subtitleFloat 6s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+        }
+
+        @keyframes subtitleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, 
+                rgba(255, 182, 193, 0.8), 
+                rgba(255, 192, 203, 0.8));
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(255, 182, 193, 0.6);
+            animation: buttonPulse 3s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 40px rgba(255, 182, 193, 0.8);
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(255, 182, 193, 0.6); }
+            50% { box-shadow: 0 0 50px rgba(255, 182, 193, 0.9); }
+        }
+
+        /* Floating decorative elements */
+        .floating-element {
+            position: fixed;
+            border-radius: 50%;
+            animation: floatElement 10s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #FFB6C1, #FFC0CB);
+            top: 15%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 15px;
+            height: 15px;
+            background: linear-gradient(45deg, #E6E6FA, #F0E68C);
+            top: 25%;
+            right: 20%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(45deg, #F5F5DC, #FFE4E1);
+            bottom: 30%;
+            left: 10%;
+            animation-delay: 4s;
+        }
+
+        .floating-element:nth-child(4) {
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(45deg, #F0E68C, #FFB6C1);
+            bottom: 20%;
+            right: 15%;
+            animation-delay: 6s;
+        }
+
+        @keyframes floatElement {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(90deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+            75% { transform: translateY(-15px) rotate(270deg); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Additional dreamy effects */
+        .dreamy-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(255, 182, 193, 0.1) 0%, transparent 50%);
+            animation: overlayShift 15s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes overlayShift {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    
+    <!-- Cloud layers -->
+    <div class="cloud-layer">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+        <div class="cloud cloud4"></div>
+    </div>
+    
+    <!-- Floating particles -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    
+    <!-- Floating decorative elements -->
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    
+    <!-- Dreamy overlay -->
+    <div class="dreamy-overlay"></div>
+    
+    <!-- Main content -->
+    <div class="container">
+        <h1 class="title">Serenity</h1>
+        <p class="subtitle">Where dreams float like clouds in the sky</p>
+        <button class="cta-button" onclick="window.location.href='dream-image.html'">Enter the Dream</button>
+    </div>
+</body>
+</html>
